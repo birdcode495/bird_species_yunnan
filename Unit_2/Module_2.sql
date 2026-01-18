@@ -28,4 +28,10 @@ GROUP BY 属 ORDER BY 记录数 DESC, 百分比;
 
 ---- ******************************************************************
 
+-- 人类观测数据存在超过1000米的坐标不确定性
+SELECT COUNT(DISTINCT id) AS 记录数,
+ROUND((COUNT(DISTINCT id) / 405086.0) * 100, 2) AS 百分比
+FROM aves_yunnan
+WHERE coordinateuncertaintyinmeters > 1000 AND basisofrecord = 'HUMAN_OBSERVATION';
+
 
