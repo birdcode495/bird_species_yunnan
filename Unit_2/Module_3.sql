@@ -16,4 +16,13 @@ FROM aves_yunnan
 WHERE taxonrank IN ('GENUS', 'FAMILY')
 AND coordinateuncertaintyinmeters >1000;
 
+-- 地理坐标不确定性统计模式计算（坐标值大于1000米）及属与科分类范围
+SELECT coordinateuncertaintyinmeters, COUNT(*) AS frequency
+FROM aves_yunnan
+WHERE taxonrank IN ('GENUS', 'FAMILY') AND 
+coordinateuncertaintyinmeters > 1000
+GROUP BY coordinateuncertaintyinmeters ORDER BY frequency DESC
+LIMIT 42;
+
+
 
