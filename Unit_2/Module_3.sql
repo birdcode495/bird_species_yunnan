@@ -14,7 +14,7 @@ MIN(coordinateuncertaintyinmeters) as 最小值,
 MAX(coordinateuncertaintyinmeters) AS 最大值
 FROM aves_yunnan
 WHERE taxonrank IN ('GENUS', 'FAMILY')
-AND coordinateuncertaintyinmeters >1000;
+AND coordinateuncertaintyinmeters > 1000;
 
 -- 地理坐标不确定性统计模式计算（坐标值大于1000米）及属与科分类范围
 SELECT coordinateuncertaintyinmeters, COUNT(*) AS frequency
@@ -24,5 +24,18 @@ coordinateuncertaintyinmeters > 1000
 GROUP BY coordinateuncertaintyinmeters ORDER BY frequency DESC
 LIMIT 42;
 
+-- 所应用的分类学优化整合了地理坐标的不确定性指标与适用于属和科分类范围的相关标准
 
+---- 分类学清理前的记录数
+SELECT COUNT(DISTINCT id) AS 分类学清理前的总记录数
+FROM aves_yunnan;
 
+---- 删除不适合分析的记录
+DELETE FROM aves_yunnan
+WHERE 
+taxonrank IN ('GENUS', 'FAMILY')
+AND coordinateuncertaintyinmeters > 1000;
+
+---- 分类清理后的记录数
+SELECT COUNT(DISTINCT id) AS 分类学清理后的总记录数
+FROM aves_yunnan;
