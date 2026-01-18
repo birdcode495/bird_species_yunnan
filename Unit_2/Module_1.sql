@@ -39,3 +39,12 @@ WHERE aves_yunnan.species = multilingual_ioc.ioc_13;
 ---- 葡萄牙语
 UPDATE aves_yunnan SET 葡萄牙语 = multilingual_ioc.portuguese FROM multilingual_ioc
 WHERE aves_yunnan.species = multilingual_ioc.ioc_13;
+
+-- 创建指向GBIF和百度物种记录的URL链接
+
+---- 专栏创建
+ALTER TABLE aves_yunnan ADD COLUMN gbif varchar(100), ADD COLUMN 百度 varchar(100);
+
+---- 创建指向网页的链接
+UPDATE aves_yunnan SET gbif = 'https://www.gbif.org/zh/species/' || specieskey;
+UPDATE aves_yunnan SET 百度 = 'https://baike.baidu.com/item/' || 汉语;
