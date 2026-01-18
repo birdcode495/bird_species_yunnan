@@ -35,3 +35,16 @@ FROM aves_yunnan
 WHERE coordinateuncertaintyinmeters > 1000 AND basisofrecord = 'HUMAN_OBSERVATION';
 
 
+---- ****************** 作业 *********************************************************
+
+------ 坐标不确定度超过1000米的人类观测分类范围
+SELECT taxonrank AS 分类学范围, COUNT(DISTINCT id) AS 记录数,
+ROUND((COUNT(DISTINCT id) / 4333.0) * 100, 2) AS 百分比
+FROM aves_yunnan
+WHERE coordinateuncertaintyinmeters > 1000 AND basisofrecord = 'HUMAN_OBSERVATION'
+GROUP BY 分类学范围 ORDER BY 记录数 DESC, 百分比;
+
+---- *********************************************************************************
+
+
+
