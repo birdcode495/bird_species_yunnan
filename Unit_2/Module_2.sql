@@ -16,3 +16,16 @@ WHERE basisofrecord = 'HUMAN_OBSERVATION'
 GROUP BY 分类学范围 ORDER BY 记录数 DESC, 百分比;
 
 
+---- ****************** 作业 *******************************************
+
+------ 按属名分类的人类观察记录计数（分类范围为属）
+
+SELECT genus AS 属, COUNT(DISTINCT id) AS 记录数,
+ROUND((COUNT(DISTINCT id) / 4888.0) * 100, 2) AS 百分比
+FROM aves_yunnan
+WHERE basisofrecord = 'HUMAN_OBSERVATION' AND taxonrank = 'GENUS'
+GROUP BY 属 ORDER BY 记录数 DESC, 百分比;
+
+---- ******************************************************************
+
+
