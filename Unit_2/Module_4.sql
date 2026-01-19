@@ -11,7 +11,17 @@ MAX(coordinateuncertaintyinmeters) AS maximum
 FROM aves_yunnan
 WHERE year < 1900;
 
+------ 1900 年以前的记录在临时清理之前的数量
+SELECT COUNT(DISTINCT id) AS 记录数
+FROM aves_yunnan;
 
+------ 删除不适合分析的记录
+DELETE FROM aves_yunnan
+WHERE 
+year < 1900;
+
+------ 1900 年前的记录数量（经过临时清理后)
+SELECT COUNT(DISTINCT id) AS 记录数
+FROM aves_yunnan;
 
 ---- ***************************** 作业结束 *******************************
-
