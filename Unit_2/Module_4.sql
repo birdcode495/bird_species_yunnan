@@ -58,6 +58,23 @@ MAX(coordinateuncertaintyinmeters) AS 最大值
 FROM aves_yunnan
 WHERE (year IS NULL OR month IS NULL) AND coordinateuncertaintyinmeters > 1000;
 
+------ 删除缺少日期信息的行之前的记录数
+SELECT COUNT(DISTINCT id) AS 记录数
+FROM aves_yunnan;
+
+------ 删除不适合分析的记录
+DELETE FROM aves_yunnan
+WHERE 
+(year IS NULL OR month IS NULL) AND coordinateuncertaintyinmeters > 1000;
+
+------ 删除缺少日期信息的行后，记录数为多少？
+SELECT COUNT(DISTINCT id) AS 记录数
+FROM aves_yunnan;
+
+---- ************************** 作业结束 **********************************
+
+
+
 
 
 
