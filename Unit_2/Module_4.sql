@@ -45,4 +45,20 @@ year < 1950 AND coordinateuncertaintyinmeters > 1000;
 ------ 1950 年前的记录数量（经过临时清理后)
 SELECT COUNT(DISTINCT id) AS 记录数
 FROM aves_yunnan;
----- ***************************** 作业结束 *******************************
+---- ************************** 作业结束 **********************************
+
+---- **************************** 作业 ***********************************
+
+------ 计算缺失日期（数据收集年份或月份）记录的统计指标
+SELECT COUNT(DISTINCT id) AS 记录数,
+AVG(coordinateuncertaintyinmeters) AS 统计均值,
+STDDEV(coordinateuncertaintyinmeters) AS 标准差,
+MIN(coordinateuncertaintyinmeters) AS 最小值,
+MAX(coordinateuncertaintyinmeters) AS 最大值
+FROM aves_yunnan
+WHERE (year IS NULL OR month IS NULL) AND coordinateuncertaintyinmeters > 1000;
+
+
+
+
+
